@@ -2,8 +2,31 @@
     <x_snc_json_cfg_mgr_json_configuration action="INSERT_OR_UPDATE">
         <active>true</active>
         <configuration><![CDATA[var oCfg = {
-
-};]]></configuration>
+	trigger: {
+		on_retire: {
+			trigger_condition: {
+				install_status: {
+					new_value: '7',
+					old_value: '!7',
+				} // field install status
+			}, // trigger condition
+			validation: {
+				ensure_description: {
+					type: 'field_value_check',
+					parameters: {
+						field_value_pairs: {
+							short_description: {
+								value: 'sugus',
+							}, // field
+						}, // field value pairs
+					}, // parameters
+					message: 'description must be sugus',
+				}, // ensure description
+			}, // validation
+			incident_template: 'name_of_the_incident_template',
+		}, // on retire
+	}, // trigger
+}; // config]]></configuration>
         <name>CIManager_cmdb_ci</name>
         <number>OCFG00000002</number>
         <root>true</root>
@@ -11,13 +34,13 @@
         <sys_created_by>tom.hauri</sys_created_by>
         <sys_created_on>2024-11-15 07:46:57</sys_created_on>
         <sys_id>638ab3ba87319a50211fa7980cbb355a</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>9</sys_mod_count>
         <sys_name>CIManager_cmdb_ci</sys_name>
         <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
         <sys_policy/>
         <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
         <sys_update_name>x_snc_json_cfg_mgr_json_configuration_638ab3ba87319a50211fa7980cbb355a</sys_update_name>
         <sys_updated_by>tom.hauri</sys_updated_by>
-        <sys_updated_on>2024-11-15 07:46:57</sys_updated_on>
+        <sys_updated_on>2024-11-15 09:18:20</sys_updated_on>
     </x_snc_json_cfg_mgr_json_configuration>
 </record_update>

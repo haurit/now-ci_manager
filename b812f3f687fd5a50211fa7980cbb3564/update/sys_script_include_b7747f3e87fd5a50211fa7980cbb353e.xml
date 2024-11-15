@@ -10,6 +10,9 @@
         <script><![CDATA[var CIManager = Class.create();
 CIManager.prototype = {
 	initialize: function (grCurrent, grPrevious) {
+		gs.info('CIManager.initialize START');
+		this.grCurrent = grCurrent;
+		this.grPrevious = grPrevious;
 		this._gt = new global.GlobalTools();
 		this._gtArray = new global.GlobalToolsArray();
 		this._gtObject = new global.GlobalToolsObject();
@@ -17,25 +20,56 @@ CIManager.prototype = {
 		this._gtRecordRead = new global.GlobalToolsRecordRead();
 		this._gtRecordWrite = new global.GlobalToolsRecordWrite();
 		this._gtAttachment = new global.GlobalToolsAttachment();
-		this._gtRESTAPI = new global.GlobalToolsRESTAPI(grJobConfig.getValue('connection_credential_alias'));
-		var sJSONId = grJobConfig.getValue('json_configuration');
-		var _getCfg = new x_snc_json_cfg_mgr.getCfg(sJSONId);
-		this.oConfig = _getCfg.getConfig();
-		this.sConfig = JSON.stringify(this.oConfig);
-		this._getValue = _getCfg.getValue;
-		this._sJSONName = (sJSONId) ? grJobConfig.json_configuration.name : 'NA';
-		this._sJobCfgId = grJobConfig.getUniqueValue();
-	},
+		//this._gtRESTAPI = new global.GlobalToolsRESTAPI(grJobConfig.getValue('connection_credential_alias'));
+		this.sTableName = this._gtTable.getRecordClass(this.grCurrent);
+		var _getCfg = '';
+		var aHierarchy = this._gtTable.getTableHierarchy(this.sTableName);
+		if (this._gtArray.isValidArray(aHierarchy)) {
+			aHierarchy.some(function (sTableInHierarchy, i) {
+				gs.info('CIManager.initialize ' + sTableInHierarchy + ' i: ' + String(i));
+				if (sTableInHierarchy != 'cmdb') {
+					_getCfg = new x_snc_json_cfg_mgr.getCfg('CIManager_' + sTableInHierarchy);
+					if (_getCfg) {
+						return true;
+					} // if found
+				} // if not cmdb root
+			}, this); // each table in hierarchy
+		} // if hierarchy
+		if (_getCfg) {
+			this.oConfig = _getCfg.getConfig();
+			this.sConfig = JSON.stringify(this.oConfig);
+			this._getValue = _getCfg.getValue;
+		} // if config
+		this.sTrigger = this.checkTrigger();
+		gs.info('CIManager.initialize END');
+	}, // function initialize
 
 	validate: function () {
 		gs.info('CIManager.validate START');
+		if (this.sTrigger) {
+			var _getCfgValidation = new x_snc_json_cfg_mgr.getCfg('CIManager_Validations');
+			var oValidationCfg = _getCfgValidation.getConfig();
+			var oValidations = this._getValue('trigger/' + this.sTrigger + '/validation');
+			Object.keys(oValidations).forEach(function (sValidation) {
+				//gs.info('CIManager.validate: ' + JSON.stringify(oValidations[sValidation]));
+				var sType = this._gtObject.getValue('type', '', oValidations[sValidation]);
+				var sScriptFunction = this._gtObject.getValue(sType + '/script_function', '', oValidationCfg);
+				gs.info('CIManager.validate: ' + sType + ' sf: ' + sScriptFunction);
+			}, this); // each validation
+		} // if trigger
 
+		gs.addErrorMessage('cannot save');
+		this.grCurrent.setAbortAction(true);
 
 		gs.info('CIManager.validate END');
 	}, // function validate
 
 	action: function () {
 		gs.info('CIManager.action START');
+		if (this.sTrigger) {
+			gs.info('CIManager.action run: ' + this.sConfig);	
+		} // if trigger
+		gs.info('CIManager.action: END');
 		// u_ci_manager_action
 		// u_number
 		// u_configuration_item
@@ -51,20 +85,27 @@ CIManager.prototype = {
 		gs.info('CIManager.action END');
 	}, // function action
 
+	checkTrigger: function () {
+		return 'on_retire';
+	}, // function checkTrigger
+
 	type: 'CIManager',
+	version: '1.0.0',
+	author: 'ServiceNow Customer Outcomes, Tom Hauri',
+	email: 'tom@hauri.biz',
 
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>tom.hauri</sys_created_by>
         <sys_created_on>2024-11-15 07:20:25</sys_created_on>
         <sys_id>b7747f3e87fd5a50211fa7980cbb353e</sys_id>
-        <sys_mod_count>4</sys_mod_count>
+        <sys_mod_count>16</sys_mod_count>
         <sys_name>CIManager</sys_name>
         <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
         <sys_policy/>
         <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
         <sys_update_name>sys_script_include_b7747f3e87fd5a50211fa7980cbb353e</sys_update_name>
         <sys_updated_by>tom.hauri</sys_updated_by>
-        <sys_updated_on>2024-11-15 07:40:08</sys_updated_on>
+        <sys_updated_on>2024-11-15 09:25:34</sys_updated_on>
     </sys_script_include>
 </record_update>
