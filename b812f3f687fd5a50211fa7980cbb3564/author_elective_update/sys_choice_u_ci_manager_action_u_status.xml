@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="u_status" table="u_ci_manager_action" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>u_status</element>
+            <name>u_ci_manager_action</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>tom.hauri</sys_created_by>
+            <sys_created_on>2024-11-15 07:31:57</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>u_status</sys_name>
+            <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
+            <sys_update_name>sys_choice_u_ci_manager_action_u_status</sys_update_name>
+            <sys_updated_by>tom.hauri</sys_updated_by>
+            <sys_updated_on>2024-11-15 07:31:57</sys_updated_on>
+        </sys_choice_set>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>New</label>
+            <language>en</language>
+            <name>u_ci_manager_action</name>
+            <sequence/>
+            <synonyms/>
+            <sys_created_by>tom.hauri</sys_created_by>
+            <sys_created_on>2024-11-15 07:31:57</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>tom.hauri</sys_updated_by>
+            <sys_updated_on>2024-11-15 07:31:57</sys_updated_on>
+            <value>1</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Running</label>
+            <language>en</language>
+            <name>u_ci_manager_action</name>
+            <sequence/>
+            <synonyms/>
+            <sys_created_by>tom.hauri</sys_created_by>
+            <sys_created_on>2024-11-15 07:32:22</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>tom.hauri</sys_updated_by>
+            <sys_updated_on>2024-11-15 07:32:22</sys_updated_on>
+            <value>10</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Retry</label>
+            <language>en</language>
+            <name>u_ci_manager_action</name>
+            <sequence/>
+            <synonyms/>
+            <sys_created_by>tom.hauri</sys_created_by>
+            <sys_created_on>2024-11-15 07:33:17</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>tom.hauri</sys_updated_by>
+            <sys_updated_on>2024-11-15 07:33:39</sys_updated_on>
+            <value>20</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Error</label>
+            <language>en</language>
+            <name>u_ci_manager_action</name>
+            <sequence/>
+            <synonyms/>
+            <sys_created_by>tom.hauri</sys_created_by>
+            <sys_created_on>2024-11-15 07:33:53</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>tom.hauri</sys_updated_by>
+            <sys_updated_on>2024-11-15 07:33:53</sys_updated_on>
+            <value>30</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Completed</label>
+            <language>en</language>
+            <name>u_ci_manager_action</name>
+            <sequence/>
+            <synonyms/>
+            <sys_created_by>tom.hauri</sys_created_by>
+            <sys_created_on>2024-11-15 07:32:37</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_updated_by>tom.hauri</sys_updated_by>
+            <sys_updated_on>2024-11-15 07:33:30</sys_updated_on>
+            <value>40</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>u_status</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Cancelled</label>
+            <language>en</language>
+            <name>u_ci_manager_action</name>
+            <sequence/>
+            <synonyms/>
+            <sys_created_by>tom.hauri</sys_created_by>
+            <sys_created_on>2024-11-15 07:32:58</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>tom.hauri</sys_updated_by>
+            <sys_updated_on>2024-11-15 07:32:58</sys_updated_on>
+            <value>50</value>
+        </sys_choice>
+    </sys_choice>
+</record_update>

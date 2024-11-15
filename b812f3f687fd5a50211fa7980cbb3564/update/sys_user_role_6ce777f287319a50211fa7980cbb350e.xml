@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_user_role">
+    <sys_user_role action="INSERT_OR_UPDATE">
+        <assignable_by/>
+        <can_delegate>true</can_delegate>
+        <description/>
+        <elevated_privilege>false</elevated_privilege>
+        <encryption_context/>
+        <grantable>true</grantable>
+        <includes_roles/>
+        <name>u_ci_manager_action_task_user</name>
+        <scoped_admin>false</scoped_admin>
+        <suffix/>
+        <sys_class_name>sys_user_role</sys_class_name>
+        <sys_created_by>tom.hauri</sys_created_by>
+        <sys_created_on>2024-11-15 07:35:01</sys_created_on>
+        <sys_id>6ce777f287319a50211fa7980cbb350e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>u_ci_manager_action_task_user</sys_name>
+        <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
+        <sys_update_name>sys_user_role_6ce777f287319a50211fa7980cbb350e</sys_update_name>
+        <sys_updated_by>tom.hauri</sys_updated_by>
+        <sys_updated_on>2024-11-15 07:35:01</sys_updated_on>
+    </sys_user_role>
+</record_update>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="u_status" table="u_ci_manager_action_task" version="3">
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>u_status</element>
+            <name>u_ci_manager_action_task</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>tom.hauri</sys_created_by>
+            <sys_created_on>2024-11-15 07:37:05</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>u_status</sys_name>
+            <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
+            <sys_update_name>sys_choice_u_ci_manager_action_task_u_status</sys_update_name>
+            <sys_updated_by>tom.hauri</sys_updated_by>
+            <sys_updated_on>2024-11-15 07:37:05</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

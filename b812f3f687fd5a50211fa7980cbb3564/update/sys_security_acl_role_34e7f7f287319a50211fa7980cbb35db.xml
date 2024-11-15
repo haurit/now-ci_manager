@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl_role">
+    <sys_security_acl_role action="INSERT_OR_UPDATE">
+        <sys_class_name>sys_security_acl_role</sys_class_name>
+        <sys_created_by>tom.hauri</sys_created_by>
+        <sys_created_on>2024-11-15 07:35:02</sys_created_on>
+        <sys_id>34e7f7f287319a50211fa7980cbb35db</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>u_ci_manager_action_task.u_ci_manager_action_task_user</sys_name>
+        <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
+        <sys_security_acl display_value="u_ci_manager_action_task">f4e7f7f287319a50211fa7980cbb35d4</sys_security_acl>
+        <sys_update_name>sys_security_acl_role_34e7f7f287319a50211fa7980cbb35db</sys_update_name>
+        <sys_updated_by>tom.hauri</sys_updated_by>
+        <sys_updated_on>2024-11-15 07:35:02</sys_updated_on>
+        <sys_user_role display_value="u_ci_manager_action_task_user" name="u_ci_manager_action_task_user">6ce777f287319a50211fa7980cbb350e</sys_user_role>
+    </sys_security_acl_role>
+</record_update>

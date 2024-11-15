@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_embedded_help_role">
+    <sys_embedded_help_role action="INSERT_OR_UPDATE">
+        <order>100</order>
+        <role display_value="u_ci_manager_action_user" name="u_ci_manager_action_user">2a46fbfe87fd5a50211fa7980cbb357d</role>
+        <sys_class_name>sys_embedded_help_role</sys_class_name>
+        <sys_created_by>tom.hauri</sys_created_by>
+        <sys_created_on>2024-11-15 07:28:03</sys_created_on>
+        <sys_id>2e46fbfe87fd5a50211fa7980cbb3580</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>2a46fbfe87fd5a50211fa7980cbb357d</sys_name>
+        <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
+        <sys_update_name>sys_embedded_help_role_2e46fbfe87fd5a50211fa7980cbb3580</sys_update_name>
+        <sys_updated_by>tom.hauri</sys_updated_by>
+        <sys_updated_on>2024-11-15 07:28:03</sys_updated_on>
+    </sys_embedded_help_role>
+</record_update>

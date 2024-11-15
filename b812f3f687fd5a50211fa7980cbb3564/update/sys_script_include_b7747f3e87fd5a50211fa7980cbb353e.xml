@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>global.CIManager</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>CIManager</name>
+        <script><![CDATA[var CIManager = Class.create();
+CIManager.prototype = {
+	initialize: function (grCurrent, grPrevious) {
+		this._gt = new global.GlobalTools();
+		this._gtArray = new global.GlobalToolsArray();
+		this._gtObject = new global.GlobalToolsObject();
+		this._gtTable = new global.GlobalToolsTable();
+		this._gtRecordRead = new global.GlobalToolsRecordRead();
+		this._gtRecordWrite = new global.GlobalToolsRecordWrite();
+		this._gtAttachment = new global.GlobalToolsAttachment();
+		this._gtRESTAPI = new global.GlobalToolsRESTAPI(grJobConfig.getValue('connection_credential_alias'));
+		var sJSONId = grJobConfig.getValue('json_configuration');
+		var _getCfg = new x_snc_json_cfg_mgr.getCfg(sJSONId);
+		this.oConfig = _getCfg.getConfig();
+		this.sConfig = JSON.stringify(this.oConfig);
+		this._getValue = _getCfg.getValue;
+		this._sJSONName = (sJSONId) ? grJobConfig.json_configuration.name : 'NA';
+		this._sJobCfgId = grJobConfig.getUniqueValue();
+	},
+
+	validate: function () {
+		gs.info('CIManager.validate START');
+
+
+		gs.info('CIManager.validate END');
+	}, // function validate
+
+	action: function () {
+		gs.info('CIManager.action START');
+		// u_ci_manager_action
+		// u_number
+		// u_configuration_item
+		// u_action
+		// u_status
+
+		// u_ci_manager_action_task
+		// u_number
+		// u_ci_manager_action
+		// u_action
+		// u_status
+
+		gs.info('CIManager.action END');
+	}, // function action
+
+	type: 'CIManager',
+
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>tom.hauri</sys_created_by>
+        <sys_created_on>2024-11-15 07:20:25</sys_created_on>
+        <sys_id>b7747f3e87fd5a50211fa7980cbb353e</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>CIManager</sys_name>
+        <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
+        <sys_update_name>sys_script_include_b7747f3e87fd5a50211fa7980cbb353e</sys_update_name>
+        <sys_updated_by>tom.hauri</sys_updated_by>
+        <sys_updated_on>2024-11-15 07:40:08</sys_updated_on>
+    </sys_script_include>
+</record_update>

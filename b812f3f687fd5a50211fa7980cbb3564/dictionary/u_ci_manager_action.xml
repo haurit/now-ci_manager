@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="a016fbfe87fd5a50211fa7980cbb3516" label="CI Manager Action" max_length="40" name="u_ci_manager_action" type="collection">
+        <element label="Action" max_length="40" name="u_action" type="string"/>
+        <element choice="3" default="1" label="Status" max_length="40" name="u_status" type="integer">
+            <choice>
+                <element inactive_on_update="false" label="New" value="1"/>
+                <element inactive_on_update="false" label="Retry" value="20"/>
+                <element inactive_on_update="false" label="Running" value="10"/>
+                <element inactive_on_update="false" label="Completed" value="40"/>
+                <element inactive_on_update="false" label="Error" value="30"/>
+                <element inactive_on_update="false" label="Cancelled" value="50"/>
+            </choice>
+        </element>
+        <element label="Configuration Item" max_length="32" name="u_configuration_item" reference="cmdb_ci" type="reference"/>
+        <element label="Number" max_length="40" name="u_number" type="string"/>
+        <index name="index">
+            <element name="u_configuration_item"/>
+        </index>
+    </element>
+</database>

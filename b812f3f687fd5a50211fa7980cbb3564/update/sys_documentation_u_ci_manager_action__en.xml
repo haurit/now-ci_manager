@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="" label="CI Manager Action" language="en" table="u_ci_manager_action">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element/>
+            <help/>
+            <hint/>
+            <label>CI Manager Action</label>
+            <language>en</language>
+            <name>u_ci_manager_action</name>
+            <plural>CI Manager Actions</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>tom.hauri</sys_created_by>
+            <sys_created_on>2024-11-15 07:28:05</sys_created_on>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>CI Manager Action</sys_name>
+            <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
+            <sys_update_name>sys_documentation_u_ci_manager_action__en</sys_update_name>
+            <sys_updated_by>tom.hauri</sys_updated_by>
+            <sys_updated_on>2024-11-15 07:28:05</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

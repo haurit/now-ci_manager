@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="25c737f287319a50211fa7980cbb35f6" label="CI Manager Action Task" max_length="40" name="u_ci_manager_action_task" type="collection">
+        <element label="CI Manager Action" max_length="32" name="u_ci_manager_action" reference="u_ci_manager_action" type="reference"/>
+        <element choice="3" choice_field="u_status" choice_table="u_ci_manager_action" label="Status" max_length="40" name="u_status" type="integer">
+            <choice/>
+        </element>
+        <element label="Number" max_length="40" name="u_number" type="string"/>
+        <element label="Action" max_length="40" name="u_action" type="string"/>
+        <index name="index">
+            <element name="u_ci_manager_action"/>
+        </index>
+    </element>
+</database>
