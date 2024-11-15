@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="x_snc_json_cfg_mgr_json_configuration">
+    <x_snc_json_cfg_mgr_json_configuration action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <configuration><![CDATA[var oCfg = {
+
+};]]></configuration>
+        <name>CIManager_Actions</name>
+        <number>OCFG00000005</number>
+        <root>false</root>
+        <sys_class_name>x_snc_json_cfg_mgr_json_configuration</sys_class_name>
+        <sys_created_by>tom.hauri</sys_created_by>
+        <sys_created_on>2024-11-15 07:49:08</sys_created_on>
+        <sys_id>f70b33fa87319a50211fa7980cbb35d3</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>CIManager_Actions</sys_name>
+        <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
+        <sys_update_name>x_snc_json_cfg_mgr_json_configuration_f70b33fa87319a50211fa7980cbb35d3</sys_update_name>
+        <sys_updated_by>tom.hauri</sys_updated_by>
+        <sys_updated_on>2024-11-15 07:49:08</sys_updated_on>
+    </x_snc_json_cfg_mgr_json_configuration>
+</record_update>
