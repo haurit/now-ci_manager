@@ -9,19 +9,31 @@
 				query_old: 'install_status!=7',
 			}, // trigger condition
 			validation: {
-				ensure_description: {
-					type: 'field_value_check',
-					parameters: {
-						field_value_pairs: {
-							short_description: {
-								value: 'sugus',
-							}, // field
-						}, // field value pairs
-					}, // parameters
-					message: 'description must be sugus',
-				}, // ensure description
+				query: {
+					rel_incident: {
+						table: 'incident',
+						query: 'active=true^cmdb_ci=[sys_id]',
+						result: 0, // valid are also '<1' or '>0'
+						message: 'ci_lifecycle_retired_error_rel_incident',
+					}, // related asset
+				}, // record
 			}, // validation
-			incident_template: 'name_of_the_incident_template',
+			error_handling: {
+				task_table: 'incident', // can be any task table
+				task_template: 'ci_lifecycle_retired_error', // generic template for the task
+				//group_field: 'change_control',
+				//user_field: 'assigned_to',
+			}, // error handling
+			action: {
+				start_flow_1: {
+					flow_id: '', // sys_id of the flow or subflow
+					parameters: { // parameter to be passed to the flow
+						record: 'current', // current is the current CI
+						record_old: 'previous', // previous is the old CI
+						trigger: 'trigger', // trigger is the name of the trigger
+					}, // parameters
+				}, // flow name
+			}, // actions
 		}, // on retire
 	}, // trigger
 }; // config]]></configuration>
@@ -32,13 +44,13 @@
         <sys_created_by>tom.hauri</sys_created_by>
         <sys_created_on>2024-11-15 07:46:57</sys_created_on>
         <sys_id>638ab3ba87319a50211fa7980cbb355a</sys_id>
-        <sys_mod_count>10</sys_mod_count>
+        <sys_mod_count>24</sys_mod_count>
         <sys_name>CIManager_cmdb_ci</sys_name>
         <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
         <sys_policy/>
         <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
         <sys_update_name>x_snc_json_cfg_mgr_json_configuration_638ab3ba87319a50211fa7980cbb355a</sys_update_name>
         <sys_updated_by>tom.hauri</sys_updated_by>
-        <sys_updated_on>2024-11-15 09:35:28</sys_updated_on>
+        <sys_updated_on>2024-11-16 21:23:30</sys_updated_on>
     </x_snc_json_cfg_mgr_json_configuration>
 </record_update>

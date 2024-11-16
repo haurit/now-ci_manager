@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_message">
+    <sys_ui_message action="INSERT_OR_UPDATE">
+        <application/>
+        <code/>
+        <commented_message/>
+        <key>ci_lifecycle_retired_error_rel_ci</key>
+        <language>en</language>
+        <message>You cannot retire this CI until the related CI's of this type are also retired.</message>
+        <sys_class_name>sys_ui_message</sys_class_name>
+        <sys_created_by>tom.hauri</sys_created_by>
+        <sys_created_on>2024-11-16 19:58:41</sys_created_on>
+        <sys_id>ad9befdb87f55e509f30eacbbbbb35da</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>ci_lifecycle_retired_error_rel_ci</sys_name>
+        <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
+        <sys_update_name>sys_ui_message_ad9befdb87f55e509f30eacbbbbb35da</sys_update_name>
+        <sys_updated_by>tom.hauri</sys_updated_by>
+        <sys_updated_on>2024-11-16 19:58:41</sys_updated_on>
+    </sys_ui_message>
+</record_update>

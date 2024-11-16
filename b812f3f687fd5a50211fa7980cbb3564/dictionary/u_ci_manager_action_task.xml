@@ -4,7 +4,7 @@
         <element choice="3" choice_field="u_status" choice_table="u_ci_manager_action" label="Status" max_length="40" name="u_status" type="integer">
             <choice/>
         </element>
-        <element label="Number" max_length="40" name="u_number" type="string"/>
+        <element default="javascript:getNextObjNumberPadded();" display="true" dynamic_default_value="fdcb83a85f220100a9ad2572f2b4773c" label="Number" max_length="40" name="u_number" type="string" use_dynamic_default="true"/>
         <element label="Action" max_length="40" name="u_action" type="string"/>
         <index name="index">
             <element name="u_ci_manager_action"/>

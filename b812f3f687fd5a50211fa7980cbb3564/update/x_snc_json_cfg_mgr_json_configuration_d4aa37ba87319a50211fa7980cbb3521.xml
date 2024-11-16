@@ -4,19 +4,40 @@
         <configuration><![CDATA[var oCfg = {
 	'{{trigger|CIManager_cmdb_ci}}': {
 		on_retire: {
+			trigger_condition: {
+				query: 'install_status=7',
+				query_old: 'install_status!=7',
+			}, // trigger condition
 			validation: {
-				ensure_serialnumber: {
-					type: 'field_value_check',
-					parameters: {
-						field_value_pairs: {
-							serial_number: {
-								regex: '^(?!\s*$).+',
-							}, // field 2
-						}, // field value pairs
-					}, // parameters
-					message: 'serial number must be empty',
-				}, // ensure description
+				record: {
+					short_description: {
+						type: 'query',
+						query: 'short_descriptionSTARTSWITHRetiredServer',
+						query_old: '',
+						message: 'ci_lifecycle_retired_error_shortdesc',
+					}, // short description
+				}, // record
+				rel_ci: {
+					rel_apps: {
+						ci_field: 'parent', 
+						rel_type: 'Used by::Uses',
+						rel_table: 'cmdb_ci_appl',
+						rel_query: 'operational_status!=6',
+						result: 0, // valid are also '<1' or '>0'
+						message: 'ci_lifecycle_retired_error_rel_ci',
+					}, // related apps
+				}, // related cis
 			}, // validation
+			action: {
+				start_flow_2: {
+					flow_id: '', // sys_id of the flow or subflow
+					parameters: { // parameter to be passed to the flow
+						record: 'current', // current is the current CI
+						record_old: 'previous', // previous is the old CI
+						trigger: 'trigger', // trigger is the name of the trigger
+					}, // parameters
+				}, // flow name
+			}, // actions
 		}, // on retire
 	}, // trigger
 }; // config]]></configuration>
@@ -27,13 +48,13 @@
         <sys_created_by>tom.hauri</sys_created_by>
         <sys_created_on>2024-11-15 07:47:21</sys_created_on>
         <sys_id>d4aa37ba87319a50211fa7980cbb3521</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>18</sys_mod_count>
         <sys_name>CIManager_cmdb_ci_server</sys_name>
         <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
         <sys_policy/>
         <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
         <sys_update_name>x_snc_json_cfg_mgr_json_configuration_d4aa37ba87319a50211fa7980cbb3521</sys_update_name>
         <sys_updated_by>tom.hauri</sys_updated_by>
-        <sys_updated_on>2024-11-15 09:18:54</sys_updated_on>
+        <sys_updated_on>2024-11-16 21:23:36</sys_updated_on>
     </x_snc_json_cfg_mgr_json_configuration>
 </record_update>
