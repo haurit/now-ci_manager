@@ -97,6 +97,7 @@ CIManager.prototype = {
 				var sMessage = this._getValue('trigger/' + this.sTrigger + '/validation/rel_ci/' + sQueryName + '/message');
 				sMessage = gs.getMessage(sMessage);
 				var aQuery = [];
+				aQuery.push(sCIField + '=' + this.grCurrent.getUniqueValue());
 				if (sRelType) {
 					aQuery.push('type.name=' + sRelType);
 				} // if type
@@ -161,23 +162,68 @@ CIManager.prototype = {
 	action: function () {
 		//gs.info('CIManager.action START');
 		if (this.sTrigger) {
-			//gs.info('CIManager.action run: ' + this.sConfig);
+			var grCIMgrAction = new GlideRecord('u_ci_manager_action');
+			grCIMgrAction.setValue('u_action', this.sTrigger);
+			grCIMgrAction.setValue('u_configuration_item', this.grCurrent.getUniqueValue());
+			var sActionId = grCIMgrAction.insert();
+			if (!sActionId) {
+				gs.error('CIManager.action failed to insert action ' + this.sTrigger + ' with error: ' + grCIMgrAction.getLastErrorMessage());
+				return;
+			} // if failed
+			var oAction = this._getValue('trigger/' + this.sTrigger + '/action');
+			Object.keys(oAction).forEach(function (sAction) {
+				var grCIMgrActionTask = new GlideRecord('u_ci_manager_action_task');
+				grCIMgrActionTask.setValue('u_ci_manager_action', sActionId);
+				grCIMgrActionTask.setValue('u_action', sAction);
+				var sActionTaskId = grCIMgrActionTask.insert();
+				if (!sActionTaskId) {
+					gs.error('CIManager.action failed to insert action task ' + sAction + ' with error: ' + grCIMgrActionTask.getLastErrorMessage());
+					return;
+				} // if failed
+				var sFlowName = this._getValue('trigger/' + this.sTrigger + '/action/' + sAction + '/flowname', sAction);
+				//gs.info('CIManager.action sAction: ' + sAction + ' sFlowName: ' + sFlowName + ' sActionTaskId: ' + sActionTaskId);
+				if (sFlowName) {
+					var iFlowTimeOut = this._getValue('trigger/' + this.sTrigger + '/action/' + sAction + '/timeout', 300);
+					var oFlowOptions = {};
+					var oParameters = this._getValue('trigger/' + this.sTrigger + '/action/' + sAction + '/parameters');
+					Object.keys(oParameters).forEach(function (sParameterName) {
+						if (sParameterName == 'current') {
+							oFlowOptions[oParameters[sParameterName]] = this.grCurrent;
+						} // if current
+						if (sParameterName == 'previous') {
+							oFlowOptions[oParameters[sParameterName]] = this.grPrevious;
+						} // if previous
+						if (sParameterName == 'trigger') {
+							oFlowOptions[oParameters[sParameterName]] = this.sTrigger;
+						} // if trigger
+						if (sParameterName == 'actiontaskid') {
+							oFlowOptions[oParameters[sParameterName]] = sActionTaskId;
+						} // if action task id
+					}, this); // each parameter
+					this.runSubFlow(sFlowName, oFlowOptions, iFlowTimeOut);
+				} // if flow name
+			}, this); // each action
 		} // if trigger
-		//gs.info('CIManager.action: END');
-		// u_ci_manager_action
-		// u_number
-		// u_configuration_item
-		// u_action
-		// u_status
 
-		// u_ci_manager_action_task
-		// u_number
-		// u_ci_manager_action
-		// u_action
-		// u_status
+		//gs.info('CIManager.action: END');
+
 
 		//gs.info('CIManager.action END');
 	}, // function action
+
+	runSubFlow: function (sFlowName, oFlowOptions, iFlowTimeOut) {
+		try {
+			var oResult = sn_fd.FlowAPI.getRunner()
+				.subflow(sFlowName)
+				.inBackground()
+				.withInputs(oFlowOptions)
+				.timeout(iFlowTimeOut)
+				.run();
+			gs.info('CIManager.runSubFlow oResult' + JSON.stringify(oResult));
+		} catch (oEx) {
+			gs.error('CIManager.runSubFlow error running flow sFlowName: ' + sFlowName + ' oFlowOptions: ' + JSON.stringify(oFlowOptions) + ' error: ' + String(oEx));
+		} // try
+	}, // function runSubFlow
 
 	checkTrigger: function () {
 		var sReturnTrigger = '';
@@ -242,13 +288,13 @@ CIManager.prototype = {
         <sys_created_by>tom.hauri</sys_created_by>
         <sys_created_on>2024-11-15 07:20:25</sys_created_on>
         <sys_id>b7747f3e87fd5a50211fa7980cbb353e</sys_id>
-        <sys_mod_count>67</sys_mod_count>
+        <sys_mod_count>79</sys_mod_count>
         <sys_name>CIManager</sys_name>
         <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
         <sys_policy/>
         <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
         <sys_update_name>sys_script_include_b7747f3e87fd5a50211fa7980cbb353e</sys_update_name>
         <sys_updated_by>tom.hauri</sys_updated_by>
-        <sys_updated_on>2024-11-16 21:13:36</sys_updated_on>
+        <sys_updated_on>2024-11-17 08:30:41</sys_updated_on>
     </sys_script_include>
 </record_update>

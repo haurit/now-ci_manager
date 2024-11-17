@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="25c737f287319a50211fa7980cbb35f6" label="CI Manager Action Task" max_length="40" name="u_ci_manager_action_task" type="collection">
-        <element label="CI Manager Action" max_length="32" name="u_ci_manager_action" reference="u_ci_manager_action" type="reference"/>
-        <element choice="3" choice_field="u_status" choice_table="u_ci_manager_action" label="Status" max_length="40" name="u_status" type="integer">
+        <element label="CI Manager Action" max_length="32" name="u_ci_manager_action" reference="u_ci_manager_action" reference_cascade_rule="delete" type="reference"/>
+        <element choice="3" choice_field="u_status" choice_table="u_ci_manager_action" default="1" label="Status" max_length="40" name="u_status" type="integer">
             <choice/>
         </element>
         <element default="javascript:getNextObjNumberPadded();" display="true" dynamic_default_value="fdcb83a85f220100a9ad2572f2b4773c" label="Number" max_length="40" name="u_number" type="string" use_dynamic_default="true"/>
