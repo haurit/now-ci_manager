@@ -10,7 +10,11 @@
 						type: 'query', // currently only type query, todo: regex
 						query: 'short_descriptionSTARTSWITHRetiredWinServer', // query to be run on current record
 						query_old: '', // query to be run on previous record
-						message: 'ci_lifecycle_retired_error_shortdesc', // message in case of an error
+						message: {
+							message: 'ci_lifecycle_retired_error_shortdesc', // message in case of an error
+							parameters: ['RetiredWinServer'], // fix parameter to getMessage (will be first)
+							ci_field_values: ['short_description'], // dynamic parameter to getMessage (will be after fixed)
+						}, // message error
 					}, // short description
 				}, // record
 			}, // validation
@@ -24,13 +28,13 @@
         <sys_created_by>tom.hauri</sys_created_by>
         <sys_created_on>2024-11-15 07:47:41</sys_created_on>
         <sys_id>9bbab7ba87319a50211fa7980cbb35d9</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>12</sys_mod_count>
         <sys_name>CIManager_cmdb_ci_win_server</sys_name>
         <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
         <sys_policy/>
         <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
         <sys_update_name>x_snc_json_cfg_mgr_json_configuration_9bbab7ba87319a50211fa7980cbb35d9</sys_update_name>
         <sys_updated_by>tom.hauri</sys_updated_by>
-        <sys_updated_on>2024-11-17 08:24:07</sys_updated_on>
+        <sys_updated_on>2024-11-18 13:01:56</sys_updated_on>
     </x_snc_json_cfg_mgr_json_configuration>
 </record_update>

@@ -39,7 +39,7 @@ CIManager.prototype = {
 			this.sConfig = JSON.stringify(this.oConfig);
 			this._getValue = _getCfg.getValue;
 		} // if config
-		this.sTrigger = this.checkTrigger();
+		this.sTrigger = this._checkTrigger();
 		this.aErrors = [];
 		//gs.info('CIManager.initialize END');
 	}, // function initialize
@@ -50,8 +50,6 @@ CIManager.prototype = {
 			var oRecordValidations = this._getValue('trigger/' + this.sTrigger + '/validation/record');
 			Object.keys(oRecordValidations).forEach(function (sField) {
 				var sType = this._getValue('trigger/' + this.sTrigger + '/validation/record/' + sField + '/type');
-				var sMessage = this._getValue('trigger/' + this.sTrigger + '/validation/record/' + sField + '/message');
-				sMessage = gs.getMessage(sMessage);
 				if (sType == 'query') {
 					var bMatch = true, bMatchOld = true;
 					var sQuery = this._getValue('trigger/' + this.sTrigger + '/validation/record/' + sField + '/query');
@@ -68,6 +66,7 @@ CIManager.prototype = {
 					} // if query old
 					//gs.info('CIManager.validate sField: ' + sField + ' bMatch: ' + bMatch + ' bMatchOld: ' + bMatchOld + ' sMessage: ' + sMessage);
 					if ((!bMatch) || (!bMatchOld)) {
+						var sMessage = this._getMessage('trigger/' + this.sTrigger + '/validation/record/' + sField + '/message');
 						this.aErrors.push(sMessage);
 					} // if match
 				} // if type query
@@ -78,11 +77,10 @@ CIManager.prototype = {
 				var sQuery = this._getValue('trigger/' + this.sTrigger + '/validation/query/' + sQueryName + '/query');
 				sQuery = this._gt.replacePlaceholders(sQuery, this.grCurrent);
 				var sResult = this._getValue('trigger/' + this.sTrigger + '/validation/query/' + sQueryName + '/result');
-				var sMessage = this._getValue('trigger/' + this.sTrigger + '/validation/query/' + sQueryName + '/message');
-				sMessage = gs.getMessage(sMessage);
 				var iResultCount = this._gtRecordRead.countRecords(sTable, sQuery);
 				//gs.info('CIManager.validate query sTable: ' + sTable + ' sQuery: ' + sQuery + ' iResultCount: ' + iResultCount + ' sResult: ' + sResult);
-				if (!this.compareCount(sResult, iResultCount)) {
+				if (!this._compareCount(sResult, iResultCount)) {
+					var sMessage = this._getMessage('trigger/' + this.sTrigger + '/validation/query/' + sQueryName + '/message');
 					this.aErrors.push(sMessage);
 				} // if count does not match
 			}, this); // each query validation
@@ -94,8 +92,6 @@ CIManager.prototype = {
 				var sRelClass = this._getValue('trigger/' + this.sTrigger + '/validation/rel_ci/' + sQueryName + '/rel_table');
 				var sRelQuery = this._getValue('trigger/' + this.sTrigger + '/validation/rel_ci/' + sQueryName + '/rel_query');
 				var sResult = this._getValue('trigger/' + this.sTrigger + '/validation/rel_ci/' + sQueryName + '/result');
-				var sMessage = this._getValue('trigger/' + this.sTrigger + '/validation/rel_ci/' + sQueryName + '/message');
-				sMessage = gs.getMessage(sMessage);
 				var aQuery = [];
 				aQuery.push(sCIField + '=' + this.grCurrent.getUniqueValue());
 				if (sRelType) {
@@ -109,7 +105,8 @@ CIManager.prototype = {
 				} // if query
 				var iResultCount = this._gtRecordRead.countRecords('cmdb_rel_ci', aQuery.join('^'));
 				//gs.info('CIManager.validate rel ci sQuery: ' + aQuery.join('^') + ' iResultCount: ' + iResultCount + ' sResult: ' + sResult);
-				if (!this.compareCount(sResult, iResultCount)) {
+				if (!this._compareCount(sResult, iResultCount)) {
+					var sMessage = this._getMessage('trigger/' + this.sTrigger + '/validation/rel_ci/' + sQueryName + '/message');
 					this.aErrors.push(sMessage);
 				} // if count does not match
 			}, this); // each rel ci validation
@@ -118,7 +115,7 @@ CIManager.prototype = {
 				if (gs.isInteractive()) {
 					gs.addErrorMessage(gs.getMessage('cimanager_validation_screen_error') + ': [' + this.aErrors.join('], [') + ']');
 				} else {
-					this.createErrorTask();
+					this._createErrorTask();
 				} // if UI
 				this.grCurrent.setAbortAction(true);
 			} // if errors
@@ -126,7 +123,27 @@ CIManager.prototype = {
 		//gs.info('CIManager.validate END');
 	}, // function validate
 
-	compareCount: function (sExpectedResult, iEffectiveResult) {
+	_getMessage: function (sMessagePath) {
+		var oMessage = this._getValue(sMessagePath);
+		if (this._gt.getType(oMessage) == 'string') {
+			sMessage = gs.getMessage(oMessage);
+		} else {
+			sMessage = (oMessage.hasOwnProperty('message')) ? oMessage['message'] : 'Message not found';
+			var oMessageArgs = [];
+			var oParameters = (oMessage.hasOwnProperty('parameters')) ? oMessage['parameters'] : [];
+			oParameters.forEach(function (sParameter) {
+				oMessageArgs.push(sParameter);
+			}, this);
+			var oCIFieldValues = (oMessage.hasOwnProperty('ci_field_values')) ? oMessage['ci_field_values'] : [];
+			oCIFieldValues.forEach(function (sCIFieldValue) {
+				oMessageArgs.push(this.grCurrent.getValue(sCIFieldValue));
+			}, this);
+			sMessage = gs.getMessage(sMessage, oMessageArgs);
+		} // if message
+		return sMessage;
+	}, // function _getMessage
+
+	_compareCount: function (sExpectedResult, iEffectiveResult) {
 		var bResult = false;
 		var sOperator = '';
 		var iExpectedResult = -1;
@@ -155,9 +172,9 @@ CIManager.prototype = {
 				bResult = true;
 			} // if result
 		} // if expected result and effective result
-		//gs.info('CIManager.compareCount sExpectedResult: ' + sExpectedResult + ' iExpectedResult: ' + iExpectedResult + ' sOperator: ' + sOperator + ' iEffectiveResult: ' + iEffectiveResult + ' bResult: ' + bResult + ' type: ' + this._gt.getType(sExpectedResult));
+		//gs.info('CIManager._compareCount sExpectedResult: ' + sExpectedResult + ' iExpectedResult: ' + iExpectedResult + ' sOperator: ' + sOperator + ' iEffectiveResult: ' + iEffectiveResult + ' bResult: ' + bResult + ' type: ' + this._gt.getType(sExpectedResult));
 		return bResult;
-	}, // function compareCount
+	}, // function _compareCount
 
 	action: function () {
 		//gs.info('CIManager.action START');
@@ -200,7 +217,7 @@ CIManager.prototype = {
 							oFlowOptions[oParameters[sParameterName]] = sActionTaskId;
 						} // if action task id
 					}, this); // each parameter
-					this.runSubFlow(sFlowName, oFlowOptions, iFlowTimeOut);
+					this._runSubFlow(sFlowName, oFlowOptions, iFlowTimeOut);
 				} // if flow name
 			}, this); // each action
 		} // if trigger
@@ -211,7 +228,7 @@ CIManager.prototype = {
 		//gs.info('CIManager.action END');
 	}, // function action
 
-	runSubFlow: function (sFlowName, oFlowOptions, iFlowTimeOut) {
+	_runSubFlow: function (sFlowName, oFlowOptions, iFlowTimeOut) {
 		try {
 			var oResult = sn_fd.FlowAPI.getRunner()
 				.subflow(sFlowName)
@@ -219,13 +236,13 @@ CIManager.prototype = {
 				.withInputs(oFlowOptions)
 				.timeout(iFlowTimeOut)
 				.run();
-			gs.info('CIManager.runSubFlow oResult' + JSON.stringify(oResult));
+			gs.info('CIManager._runSubFlow oResult' + JSON.stringify(oResult));
 		} catch (oEx) {
-			gs.error('CIManager.runSubFlow error running flow sFlowName: ' + sFlowName + ' oFlowOptions: ' + JSON.stringify(oFlowOptions) + ' error: ' + String(oEx));
+			gs.error('CIManager._runSubFlow error running flow sFlowName: ' + sFlowName + ' oFlowOptions: ' + JSON.stringify(oFlowOptions) + ' error: ' + String(oEx));
 		} // try
-	}, // function runSubFlow
+	}, // function _runSubFlow
 
-	checkTrigger: function () {
+	_checkTrigger: function () {
 		var sReturnTrigger = '';
 		var oTriggers = this._getValue('trigger');
 		if ((oTriggers) && (this._gtObject.isObject(oTriggers))) {
@@ -246,9 +263,9 @@ CIManager.prototype = {
 			}, this); // each trigger
 		} // if trigger
 		return sReturnTrigger;
-	}, // function checkTrigger
+	}, // function _checkTrigger
 
-	createErrorTask: function (sField, sMessage) {
+	_createErrorTask: function (sField, sMessage) {
 		var sTable = this._getValue('trigger/' + this.sTrigger + '/error_handling/task_table', 'incident');
 		var sTemplateName = this._getValue('trigger/' + this.sTrigger + '/error_handling/task_template');
 		var sGroupField = this._getValue('trigger/' + this.sTrigger + '/error_handling/group_field', 'managed_by_group');
@@ -274,9 +291,9 @@ CIManager.prototype = {
 		} // if group
 		grTask.setValue('description', gs.getMessage('cimanager_validation_background_error') + ':\n' + this.aErrors.join('\n'));
 		if (!grTask.insert()) {
-			gs.error('CIManager.createErrorTask failed to insert task with error: ' + grTask.getLastErrorMessage());
+			gs.error('CIManager._createErrorTask failed to insert task with error: ' + grTask.getLastErrorMessage());
 		} // if failed
-	}, // function createErrorTask
+	}, // function _createErrorTask
 
 	type: 'CIManager',
 	version: '1.0.0',
@@ -288,13 +305,13 @@ CIManager.prototype = {
         <sys_created_by>tom.hauri</sys_created_by>
         <sys_created_on>2024-11-15 07:20:25</sys_created_on>
         <sys_id>b7747f3e87fd5a50211fa7980cbb353e</sys_id>
-        <sys_mod_count>79</sys_mod_count>
+        <sys_mod_count>86</sys_mod_count>
         <sys_name>CIManager</sys_name>
         <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
         <sys_policy/>
         <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
         <sys_update_name>sys_script_include_b7747f3e87fd5a50211fa7980cbb353e</sys_update_name>
         <sys_updated_by>tom.hauri</sys_updated_by>
-        <sys_updated_on>2024-11-17 08:30:41</sys_updated_on>
+        <sys_updated_on>2024-11-18 12:58:27</sys_updated_on>
     </sys_script_include>
 </record_update>
