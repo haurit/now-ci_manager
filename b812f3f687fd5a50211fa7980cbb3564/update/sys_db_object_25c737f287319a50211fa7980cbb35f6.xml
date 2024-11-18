@@ -13,7 +13,7 @@
         <label>CI Manager Action Task</label>
         <live_feed_enabled>false</live_feed_enabled>
         <name>u_ci_manager_action_task</name>
-        <number_ref/>
+        <number_ref display_value="CIMATSK">ac9d7f1387b95e509f30eacbbbbb35ce</number_ref>
         <provider_class/>
         <read_access>true</read_access>
         <scriptable_table>false</scriptable_table>
@@ -22,14 +22,14 @@
         <sys_created_by>tom.hauri</sys_created_by>
         <sys_created_on>2024-11-15 07:35:01</sys_created_on>
         <sys_id>25c737f287319a50211fa7980cbb35f6</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>CI Manager Action Task</sys_name>
         <sys_package display_value="POC_CMDB_Mgr" source="b812f3f687fd5a50211fa7980cbb3564">b812f3f687fd5a50211fa7980cbb3564</sys_package>
         <sys_policy/>
         <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
         <sys_update_name>sys_db_object_25c737f287319a50211fa7980cbb35f6</sys_update_name>
         <sys_updated_by>tom.hauri</sys_updated_by>
-        <sys_updated_on>2024-11-15 07:35:01</sys_updated_on>
+        <sys_updated_on>2024-11-16 21:17:21</sys_updated_on>
         <update_access>false</update_access>
         <user_role display_value="u_ci_manager_action_task_user" name="u_ci_manager_action_task_user">6ce777f287319a50211fa7980cbb350e</user_role>
         <ws_access>true</ws_access>

@@ -16,7 +16,7 @@
         <column_label>Status</column_label>
         <comments/>
         <create_roles/>
-        <default_value/>
+        <default_value>1</default_value>
         <defaultsort/>
         <delete_roles/>
         <dependent/>
@@ -58,7 +58,7 @@
         <sys_scope display_value="POC_CMDB_Mgr">b812f3f687fd5a50211fa7980cbb3564</sys_scope>
         <sys_update_name>sys_dictionary_u_ci_manager_action_task_u_status</sys_update_name>
         <sys_updated_by>tom.hauri</sys_updated_by>
-        <sys_updated_on>2024-11-15 07:38:55</sys_updated_on>
+        <sys_updated_on>2024-11-16 21:35:57</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
